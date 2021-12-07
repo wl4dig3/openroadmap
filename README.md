@@ -1,4 +1,7 @@
 # dlab
+Éste hermoso proyecto nace bajo la tutela de la academia Desafio Latam para potenciar destrezas en un ambiente laboral real. 
+El FrontEnd está hecho con el framwork VueJs versión 2 debido a su compatibilidad con las librerías de UI
+Metodología agile: Scrum, plataforma: Jira, git flow y Docker compose.
 
 ## Project setup
 ```

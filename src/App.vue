@@ -41,7 +41,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application Name</v-toolbar-title>
+      <v-toolbar-title>Nombre de la aplicación</v-toolbar-title>
     </v-app-bar>
 
     <v-main>

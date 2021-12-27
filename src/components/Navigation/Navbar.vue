@@ -1,56 +1,26 @@
 <template>
-  <v-card
-    height="400"
-    width="256"
-    class="mx-auto"
-  >
-    <v-navigation-drawer permanent>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+  <v-toolbar flat>
+    <v-toolbar-title>Titulo o logo</v-toolbar-title>
 
-      <v-divider></v-divider>
+    <v-spacer></v-spacer>
+    <v-toolbar-items flat>
+      <v-btn text>
+        <router-link to="/">Inicio</router-link> 
+      </v-btn>
 
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+      <v-btn text>
+        <router-link to="/login"> Login </router-link>
+      </v-btn>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
+      <v-btn text>
+        <router-link to="/contacto">Contacto</router-link> 
+      </v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Photos', icon: 'mdi-image' },
-          { title: 'About', icon: 'mdi-help-box' },
-        ],
-        right: null,
-      }
-    },
-  }
+export default {
+  // data: () => ({ value: "recent" }),
+};
 </script>

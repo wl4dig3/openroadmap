@@ -1,64 +1,31 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer
-    v-model="drawer"
+  <v-app>
+    <v-app-bar
     app
+    flat
     >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Proyecto DLAB
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            los mejores!
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
 
-      <v-divider></v-divider>
-
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          :to="item.to"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Nombre de la aplicación</v-toolbar-title>
+    <Navbar />
     </v-app-bar>
-
+<router-view></router-view>
     <v-main>
-      <router-view></router-view>
+      <CardHome />
     </v-main>
   </v-app>
 </template>
 
+
+
 <script>
-  export default {
-    data: () => ({ 
-      drawer: null,
-      items: [
-          { title: 'ToDo', icon: 'mdi-format-list-checks', to: '/' },
-          // { title: 'Photos', icon: 'mdi-image' },
-          { title: 'About', icon: 'mdi-help-box', to:'/about' },
-        ],
-      }),
-  }
+import Navbar from "@/components/navigation/Navbar.vue";
+import CardHome from '@/components/Cards/CardHome.vue'
+
+export default {
+  components: { Navbar, CardHome },
+  data: () => ({
+    //
+    
+  }),
+};
 </script>
+

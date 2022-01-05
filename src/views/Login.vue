@@ -41,7 +41,7 @@
                           refs="form"
                           lazy-validation
                           v-model="form.valid"
-                          @submit="formIniciarSesion"
+                          @submit="formIniciarSesion()"
                         >
                           <v-text-field
                             label="Email"
@@ -143,7 +143,7 @@
                         </h4>
                         <!-- Inicio de formulario para crear cuenta -->
                         <v-form
-                          @submit.prevent="sendRegister"
+                          @submit.prevent="sendRegister()"
                           refs="form"
                           v-model="form.valid"
                         >
@@ -276,7 +276,7 @@ export default {
       console.log(response);
     },
     // metodo para enviar el formulario  de registro
-         sendRegister(e){
+      sendRegister(e){
         e.preventDefault();
         
         console.log('enviado')

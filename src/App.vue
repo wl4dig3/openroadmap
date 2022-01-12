@@ -17,7 +17,7 @@
 
 
 <script>
-import Navbar from "@/components/navigation/Navbar.vue";
+import Navbar from "@/components/Navigation/Navbar.vue";
 import CardHome from '@/components/Cards/CardHome.vue'
 
 export default {

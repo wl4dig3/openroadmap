@@ -10,11 +10,11 @@
     <v-spacer></v-spacer>
     <v-toolbar-items flat>
       <v-btn text>
-        <router-link to="/">Inicio</router-link>
+        <router-link to="/">Iniciar</router-link>
       </v-btn>
 
       <v-btn text>
-        <router-link to="/login">Login</router-link>
+        <router-link to="/home">RoadMap</router-link>
       </v-btn>
 
       <v-btn text>

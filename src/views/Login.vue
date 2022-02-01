@@ -400,7 +400,7 @@ export default {
       // setTimeout(() => this.redirect(), 1000);
     },
     redirect() {
-      this.$router.push({ name: "Redireccionamiento" });
+      this.$router.push({ name: "Home" });
     },
     // metodo para iniciar sesion en GitHub
     loginGitHub() {
@@ -419,7 +419,7 @@ export default {
           console.log("hay error", error);
         });
 
-      this.$router.push({ name: "Redireccionamiento" });
+      this.$router.push({ name: "Home" });
     },
   },
 };

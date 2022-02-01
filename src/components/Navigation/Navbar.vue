@@ -1,19 +1,24 @@
 <template>
   <v-toolbar flat>
-    <v-toolbar-title>Titulo o logo</v-toolbar-title>
+
+     <img class=" logo" :src="require('/src/assets/logo1.png') " />
+    <v-toolbar-title >
+
+    </v-toolbar-title>
+
 
     <v-spacer></v-spacer>
     <v-toolbar-items flat>
       <v-btn text>
-        <router-link to="/">Inicio</router-link> 
+        <router-link to="/">Inicio</router-link>
       </v-btn>
 
       <v-btn text>
-        <router-link to="/login"> Login </router-link>
+        <router-link to="/login">Login</router-link>
       </v-btn>
 
       <v-btn text>
-        <router-link to="/contacto">Contacto</router-link> 
+        <router-link to="/contacto">Contacto</router-link>
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -24,3 +29,11 @@ export default {
   // data: () => ({ value: "recent" }),
 };
 </script>
+
+<style scoped>
+.logo {
+  height: 16rem;
+}
+
+
+</style>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Redireccionamiento from '../views/Redireccionamiento'
-
+import Roadmaps from '../views/Roadmaps.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +13,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/contacto',
     name: 'Contacto',
     // route level code-splitting
@@ -29,12 +21,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "contacto" */ '../views/Contacto.vue')
   },
   {
-  path: '/login',
+    path: '/login',
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+  },
+  {
+    path: '/roadmaps',
+    name: 'Roadmaps',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "login" */ '../views/Roadmaps.vue')
   },
   {
     path: '/redireccionamiento',

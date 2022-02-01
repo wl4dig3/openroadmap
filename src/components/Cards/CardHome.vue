@@ -1,27 +1,27 @@
 <template>
-  <v-main>
+  <v-container>
     <v-row>
-      <v-col v-for="cursos in info" :key="cursos.id" cols="4">
-        <v-card class="mx-auto my-10 border" max-width="374">
+      <v-col v-for="roadmap in roadmaps" :key="roadmap.id" cols="4">
+
+             <v-card class="mx-auto my-10 border rounded-xl" max-width="400">
+
           <template slot="progress">
-            <v-progress-linear
-              color="blue-grey darken-2"
-              height="10"
-              indeterminate
-            ></v-progress-linear>
+           
           </template>
 
-          <v-img :src="cursos.imagen" class="pic"></v-img>
+          <v-img contain :src="roadmap.attributes.image" class="pic"></v-img>
+          
+          <v-card-title class="font">{{ roadmap.attributes.title }}</v-card-title>
 
-          <v-card-title>{{ cursos.title }}</v-card-title>
 
           <v-card-text>
             <v-row align="center" class="mx-auto">
               <div class="grey--text ms-4"></div>
             </v-row>
 
-            <div class="my-4 text-subtitle-1">
-              {{ cursos.subtitle }}
+            <div class="my-4 text-subtitle-1 font">
+
+              {{ roadmap.attributes.subtitle }}
             </div>
             <v-rating
               :value="4.5"
@@ -39,12 +39,14 @@
           <v-card-text> </v-card-text>
 
           <v-card-actions>
-            <v-btn color="deep-purple lighten-2" text> Tomar cruso </v-btn>
+          <button class="button font" @click="$router.push('roadmaps')">
+              Click para ver mas
+            </button>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
-  </v-main>
+  </v-container>
 </template>
 
 <script>
@@ -52,17 +54,16 @@ import axios from "axios";
 export default {
   data() {
     return {
-      info: false,
+      roadmaps: false,
       loading: true,
       errored: false,
     };
   },
   mounted() {
     axios
-      .get("roadmaps.json")
+      .get("http://localhost:3000/roadmaps")
       .then((response) => {
-        this.info = response.data.roadmaps;
-        console.log(response);
+        this.roadmaps = response.data?.data;
       })
       .catch((error) => {
         console.log(error);
@@ -75,11 +76,39 @@ export default {
 
 <style scoped>
 .pic {
-  width: 9rem;
+  width: 10rem;
   height: 8rem;
+
+  margin: 0.5rem  auto 0.2rem;
+
 }
 
 .border {
-  border: 1px solid rgb(56, 46, 46);
+  border-radius: 10px;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
+
+.button {
+  color: inherit;
+  font: inherit;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #36096d;
+  background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 1.8rem / 50%;
+  transition: background-color 100ms ease-in-out,
+    transform 200ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.font {
+  color: blanchedalmond;
+}
+
 </style>

@@ -2,7 +2,7 @@
   "name": "dlab",
   "version": "0.1.0",
   "private": true,
-  "author": "wl4dig3 <wladige@gmail.com>",
+  "author": "DLab - Incubadora",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

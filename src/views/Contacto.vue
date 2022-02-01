@@ -1,9 +1,11 @@
 <template>
-    <h1>El contacto</h1>
+  <div class="contacto">
+    <h1>Contacto</h1>
+  </div>
 </template>
 
 <style scoped>
-    h1{
-        margin-top: 90px;
-    }
+.contacto{
+    margin-top: 90px;
+}
 </style>

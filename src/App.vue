@@ -8,9 +8,7 @@
     <Navbar />
     </v-app-bar>
 <router-view></router-view>
-    <v-main>
-      
-    </v-main>
+    
   </v-app>
 </template>
 
@@ -18,10 +16,9 @@
 
 <script>
 import Navbar from "@/components/Navigation/Navbar.vue";
-// import CardHome from '@/components/Cards/CardHome.vue'
 
 export default {
-  components: { Navbar},
+  components: { Navbar },
   data: () => ({
     //
     

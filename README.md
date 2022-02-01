@@ -1,7 +1,4 @@
-
-**
-
-## DLab.
+## DLab
 
 **
 *Sobre el proyecto*:
@@ -22,18 +19,12 @@ El proyecto es open source por lo  que esperamos  que la comunidad TI reciba con
 npm install -g @vue/cli
 o
 yarn global add @vue/cli
-`
-Luego, agregar la libreria Vuetify:`
- - comando cli: vue add vuetify
- 
-Para el UI, descargar:
-FontAwesome
-yarn add @fortawesome/fontawesome-free -D
-y además
-Material Design  Icons:
-yarn add material-design-icons-iconfont -D
+```
+ - Vuetify:  vue add vuetify
+ - 
+
 **
-## HeadingConfiguración de proyecto
+**Configuración de proyecto**
 Instalación de dependencias:
 
  - yarn install
@@ -53,5 +44,3 @@ Realizar pruebas unitarias:
 Realizar pruebas e2e:
 
  - yarn test:e2e
-
-> Written with [StackEdit](https://stackedit.io/).

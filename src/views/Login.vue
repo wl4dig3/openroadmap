@@ -13,13 +13,7 @@
                       <v-col cols="12" md="8">
                         <v-card-text class="mt-12">
                           <h1
-                            class="
-                              text-center
-                              display-2
-                              teal--text
-                              text--accent-3
-                              my-2
-                            "
+                            class="text-center display-2 teal--text text--accent-3 my-2"
                           >
                             Iniciar Sesión
                           </h1>
@@ -27,10 +21,23 @@
                             <v-btn class="mx-2" fab color="black" outlined>
                               <v-icon>far fa-envelope</v-icon>
                             </v-btn>
-                            <v-btn class="mx-2" fab color="black" outlined>
+                            <v-btn
+                              class="mx-2"
+                              fab
+                              color="black"
+                              outlined
+                              @click="loginGoggle"
+                            >
                               <v-icon>fab fa-google-plus-g</v-icon>
                             </v-btn>
-                            <v-btn class="mx-2" fab color="black" outlined>
+                            <!-- metodo para iniciar sesion con github  -->
+                            <v-btn
+                              class="mx-2"
+                              fab
+                              color="black"
+                              outlined
+                              @click="loginGitHub"
+                            >
                               <v-icon>fab fa-github</v-icon>
                             </v-btn>
                           </div>
@@ -39,8 +46,9 @@
                           <v-form
                             ref="form"
                             lazy-validation
-                            v-model="form.valid"
+                            
                           >
+                            <!-- input email de inicio de sesión   -->
                             <v-text-field
                               label="Email"
                               name="Email"
@@ -51,18 +59,35 @@
                               required
                               v-model="form.email"
                             />
+                            <!-- input password de inicio de sesión  -->
                             <v-text-field
                               id="password"
                               label="Password"
                               name="Password"
                               prepend-icon="lock"
-                              type="password"
+                              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="show2 ? 'text' : 'password'"
                               color="teal accent-3"
                               v-model="form.password"
+                              hint="Min 6 caracteres"
+                              value="wqfasds"
+                              class="input-group--focused"
+                              @click:append="show2 = !show2"
+                              :passwRules="[
+                                passwRules.required,
+                                passwRules.min,
+                              ]"
                             />
+                            <div v-if="error">
+                              <v-alert border="top" color="red lighten-2" dark>
+                                alerta {{ error_msg }}
+                              </v-alert>
+                            </div>
                             <!-- Fin del formulario de Inicio de sesion -->
                           </v-form>
-                          <h3 class="text-center mt-3">Recuperar clave</h3>
+                          <div v-if="recuperar">
+                            <h3 class="text-center mt-3">Recuperar clave</h3>
+                          </div>
                         </v-card-text>
                         <div class="text-center mt-3">
                           <!-- este boton es el disparador para iniciar sesion  -->
@@ -71,7 +96,7 @@
                             rounded
                             color="teal accent-3 mb-2"
                             dark
-                            @click="sendRegister"
+                            @click="formIniciarSesion"
                             >Entrar</v-btn
                           >
                         </div>
@@ -84,6 +109,7 @@
                           </h5>
                         </v-card-text>
                         <div class="text-center">
+                          <!-- botón toggle para ir a formulario de registro -->
                           <v-btn rounded outlined="" dark @click="step++"
                             >Registrate</v-btn
                           >
@@ -95,7 +121,7 @@
                     <v-row class="fill-heigth">
                       <v-col cols="12" md="4" class="teal accent-3">
                         <v-card-text class="white--text mt-12">
-                          <h1 class="text-center displat-1">
+                          <h1 class="text-center display-1">
                             Es un gusto verte de nuevo
                           </h1>
                           <h5 class="text-center mt-3">
@@ -103,6 +129,7 @@
                           </h5>
                         </v-card-text>
                         <div class="text-center">
+                          <!-- boton toggle  -->
                           <v-btn
                             class="mb-2"
                             rounded
@@ -116,12 +143,7 @@
                       <v-col cols="12" md="8">
                         <v-card-text class="mt12">
                           <h1
-                            class="
-                              text-center
-                              display-2
-                              teal--text
-                              text--accent-3
-                            "
+                            class="text-center display-2 teal--text text--accent-3"
                           >
                             Crear cuenta
                           </h1>
@@ -137,10 +159,11 @@
                             </v-btn>
                           </div>
                           <h4 class="text-center mt-4">
-                            Usa tu email para ragistrarte
+                            Usa tu email para registrarte
                           </h4>
                           <!-- INICIO de formulario de registro -->
-                          <v-form refs="form" v-model="register.valid">
+                          <v-form refs="form">
+                            <!-- input nombre  -->
                             <v-text-field
                               label="Name"
                               name="Name"
@@ -149,6 +172,7 @@
                               color="teal accent-3"
                               v-model="register.nombre"
                             />
+                            <!-- input apellido  -->
                             <v-text-field
                               label="Apellidos"
                               name="Apellidos"
@@ -160,6 +184,7 @@
                               required
                               v-model="register.apellido"
                             />
+                            <!-- input email  -->
                             <v-text-field
                               label="Email"
                               name="Email"
@@ -170,23 +195,60 @@
                               required
                               v-model="register.email"
                             />
+                            <!-- input password -->
                             <v-text-field
                               label="Password"
                               name="Password"
                               prepend-icon="lock"
-                              type="password"
+                              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="show2 ? 'text' : 'password'"
                               color="teal accent-3"
                               v-model="register.password"
+                              hint="Min 6 caracteres"
+                              value="wqfasds"
+                              class="input-group--focused"
+                              @click:append="show2 = !show2"
+                              :passwRules="[
+                                passwRules.required,
+                                passwRules.min,
+                              ]"
                             />
+                            <!-- input repeat password -->
                             <v-text-field
                               id="password2"
                               label="Repetir Password"
                               name="Repetir Password"
                               prepend-icon="lock"
-                              type="password"
+                              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                              :type="show1 ? 'text' : 'password'"
                               color="teal accent-3"
                               v-model="register.repeat_password"
+                              hint="Min 6 caracteres"
+                              value="wqfasds"
+                              class="input-group--focused"
+                              @click:append="show1 = !show1"
+                              :passwRules="[
+                                passwRules.required,
+                                passwRules.min,
+                              ]"
                             />
+                            <!-- input telefono  -->
+                            <v-text-field
+                              label="Telefóno"
+                              name="Telefóno"
+                              prepend-icon="phone"
+                              type="string"
+                              color="teal accent-3"
+                              v-model="register.telefono"
+                            />
+                            <div v-if="error2">
+                              <v-alert border="top" color="red lighten-2" dense>
+                                alerta Ey {{ error_msg }}
+                              </v-alert>
+                            </div>
+                           
+                            <!-- input foto  -->
+
                             <!-- fin de formulario de registro -->
                           </v-form>
                         </v-card-text>
@@ -196,7 +258,7 @@
                             rounded
                             color="teal accent-3 mb-3"
                             dark
-                            :disabled="!form.valid"
+                            
                             type="submit"
                             @click="sendRegister"
                             >Registrar</v-btn
@@ -214,39 +276,42 @@
     </div>
   </v-app>
 </template>
+
 <script>
 import axios from "axios";
 
 export default {
   data: () => ({
     step: 1,
+    show1: false,
+    show2: false,
     register: {
-      valid: false,
+      
       email: "",
       password: "",
       repeat_password: "",
       nombre: "",
       apellido: "",
+      telefono: "",
+      foto: "",
     },
     form: {
       email: "",
       password: "",
-      valid: false,
+      
     },
-
-    nameRules: [
-      (v) => !!v || "Nombre es requerido",
-      (v) => v.length <= 15 || "El nombre debe contener al menos 15 carácteres",
-    ],
-    apellidoRules: [
-      (v) => !!v || "Apellido es requerido",
-      (v) =>
-        v.length <= 15 || "El apellido debe contener al menos 20 carácteres",
-    ],
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+/.test(v) || "E-mail debe ser valido",
     ],
+    passwRules: {
+      required: (value) => !!value || "Contraseña requerida",
+      min: (v) => v.length >= 6 || "Min 6 caracteres",
+    },
+    error: false,
+    error_msg: "algo salio mal",
+    recuperar: false,
+    error2: false,
 
     props: {
       source: String,
@@ -257,7 +322,48 @@ export default {
     // metodo para el submit del formulario iniciar sesion
     formIniciarSesion(e) {
       e.preventDefault();
-      console.log("formulario inicio de sesion enviado");
+      const data = {
+        user: {
+          email: this.form.email,
+          password: this.form.password,
+        },
+      };
+
+      axios
+        .post(
+          "https://openroadmap-api-staging.herokuapp.com/users/sign_in",
+          data
+        )
+        .then((resp) => {
+          console.log("respuesta de api", resp);
+          if (resp.data == "ok") {
+            console.log(resp, "todo bien");
+            //poner aqui el redirect
+            setTimeout(() => this.redirect(), 1000);
+          } else {
+            this.error = true;
+            this.error_msg = resp.data.error_msg;
+            this.form = "";
+            this.recuperar= true;
+          }
+        })
+        .catch((error) => {
+          // handle error
+          alert("usuario o contraseña incorrecto");
+          console.log("error 1", error);
+          this.recuperar= true;
+          this.form = "";
+          this.error = true;
+          this.error_msg = resp.data.error_msg;
+        });
+
+      // axios.post("http://localhost:3000/users/sign_in",data).
+      // then((resp) => {
+      //   console.log(resp)
+      //   const token = resp.token;
+      //   localStorage.setItem("token", token);
+      // });
+      // console.log("formulario inicio de sesion enviado");
     },
     // metodo para enviar el formulario  de registro
     sendRegister(e) {
@@ -269,19 +375,55 @@ export default {
           password: this.register.password,
         },
       };
-      axios.post("https://openroadmap-api-staging.herokuapp.com/users", data);
-      console.log(data);
+      axios
+        .post("https://openroadmap-api-staging.herokuapp.com/users", data)
+        .then((resp) => {
+          console.log(resp);
+          if (resp.data == "ok") {
+            console.log("registro exitoso");
+            //poner aqui el redirect
+            setTimeout(() => this.redirect(), 1000);
+          } else {
+            this.error2 = true;
+            this.error_msg = resp.data.error_msg;
+          }
+        })
+        .catch((error) => {
+          // handle error
+          alert("registro invalido");
+          console.log("error 1", error);
+          this.register = "";
+          this.error2 = true;
+          this.error_msg = resp.data.error_msg;
+        });
 
-      setTimeout(()=>this.redirect(),1000)
+      // setTimeout(() => this.redirect(), 1000);
     },
-    redirect(){
-      this.$router.push({name:'Redireccionamiento'})
+    redirect() {
+      this.$router.push({ name: "Redireccionamiento" });
+    },
+    // metodo para iniciar sesion en GitHub
+    loginGitHub() {
+      alert("iniciar sesion en github");
+      axios.post("http://localhost:3000/users/auth/github/callback");
+    },
+    // metodo para iniciar sesion en Google
+    async loginGoggle() {
+      axios
+        .get("http://localhost:3000/users/auth/google_oauth2/")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          // handle error
+          console.log("hay error", error);
+        });
+
+      this.$router.push({ name: "Redireccionamiento" });
     },
   },
-  
 };
 </script>
-
 
 <style scoped>
 h6 {

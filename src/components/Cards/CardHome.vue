@@ -2,17 +2,14 @@
   <v-container>
     <v-row>
       <v-col v-for="roadmap in roadmaps" :key="roadmap.id" cols="4">
-
-             <v-card class="mx-auto my-10 border rounded-xl" max-width="400">
-
-          <template slot="progress">
-           
-          </template>
+        <v-card class="mx-auto my-10 border rounded-xl" >
+          <template slot="progress"> </template>
 
           <v-img contain :src="roadmap.attributes.image" class="pic"></v-img>
-          
-          <v-card-title class="font">{{ roadmap.attributes.title }}</v-card-title>
 
+          <v-card-title class="font">{{
+            roadmap.attributes.title
+          }}</v-card-title>
 
           <v-card-text>
             <v-row align="center" class="mx-auto">
@@ -20,7 +17,6 @@
             </v-row>
 
             <div class="my-4 text-subtitle-1 font">
-
               {{ roadmap.attributes.subtitle }}
             </div>
             <v-rating
@@ -39,7 +35,7 @@
           <v-card-text> </v-card-text>
 
           <v-card-actions>
-          <button class="button font" @click="$router.push('roadmaps')">
+            <button class="button font" @click="$router.push('roadmaps')">
               Click para ver mas
             </button>
           </v-card-actions>
@@ -61,7 +57,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/roadmaps")
+      .get("https://openroadmap-api-staging.herokuapp.com/roadmaps")
       .then((response) => {
         this.roadmaps = response.data?.data;
       })
@@ -79,8 +75,7 @@ export default {
   width: 10rem;
   height: 8rem;
 
-  margin: 0.5rem  auto 0.2rem;
-
+  margin: 0.5rem auto 0.2rem;
 }
 
 .border {
@@ -110,5 +105,6 @@ export default {
 .font {
   color: blanchedalmond;
 }
+
 
 </style>

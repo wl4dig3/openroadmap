@@ -1,34 +1,30 @@
 <template>
-
   <section class="hero">
     <v-container class="my-5 search">
       <h1 class="text-center my-5 text">ENCUENTRA TU ROADMAPS</h1>
       <v-row no-gutters>
-        <v-col cols="12" sm="6" md="6">
+        <v-col cols="12" sm="12" md="12">
           <input
             type="text"
             placeholder=" categoria"
             class="imput rounded-xl"
           />
         </v-col>
-        <v-col cols="6" md="4">
+        <!-- <v-col cols="6" md="4">
           <input
             type="text"
             placeholder=" categoria"
             class="imput ml-5 rounded-xl"
           />
-
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
     <v-container class="mt-5 pt-5">
       <div>
         <CardHome />
       </div>
-
     </v-container>
   </section>
-
 </template>
 
 <script>
@@ -37,7 +33,6 @@ export default {
   name: "hero",
   components: { CardHome },
 };
-
 </script>
 
 <style scoped>
@@ -63,4 +58,3 @@ export default {
   color: white;
 }
 </style>
-

@@ -7,7 +7,7 @@
       </v-btn>
 
       </div>
-      <h1 class="pag text-center">Pagina de redireccionamiento</h1>
+      <h1 class="pag text-center">Roadmaps</h1>
     </v-main>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   methods: {
     // HACK: Aqui se mete el request del google
     async logout(){
-      const result = this.$gAuth.signOut();
+      //const result = this.$gAuth.signOut();
       console.log('result', result);
       alert('Vuelve pronto')
       this.$router.replace("/");

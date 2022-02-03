@@ -21,6 +21,7 @@
                             <v-btn class="mx-2" fab color="black" outlined>
                               <v-icon>far fa-envelope</v-icon>
                             </v-btn>
+
                             <v-btn
                               class="mx-2"
                               fab
@@ -30,25 +31,13 @@
                             >
                               <v-icon>fab fa-google-plus-g</v-icon>
                             </v-btn>
-                            <!-- metodo para iniciar sesion con github  -->
-                            <v-btn
-                              class="mx-2"
-                              fab
-                              color="black"
-                              outlined
-                              @click="loginGitHub"
-                            >
+                            <v-btn class="mx-2" fab color="black" outlined>
                               <v-icon>fab fa-github</v-icon>
                             </v-btn>
                           </div>
                           <h4 class="text-center mlt-4 my-2">Inicia sesión</h4>
                           <!-- Inicio del formulario para logearse -->
-                          <v-form
-                            ref="form"
-                            lazy-validation
-                            
-                          >
-                            <!-- input email de inicio de sesión   -->
+                          <v-form ref="form" lazy-validation>
                             <v-text-field
                               label="Email"
                               name="Email"
@@ -59,7 +48,6 @@
                               required
                               v-model="form.email"
                             />
-                            <!-- input password de inicio de sesión  -->
                             <v-text-field
                               id="password"
                               label="Password"
@@ -78,16 +66,19 @@
                                 passwRules.min,
                               ]"
                             />
+                            <!-- V-IF alerta en cas de error  -->
                             <div v-if="error">
-                              <v-alert border="top" color="red lighten-2" dark>
+                              <v-alert border="top" color="red lighten-2" dense>
                                 alerta {{ error_msg }}
                               </v-alert>
                             </div>
                             <!-- Fin del formulario de Inicio de sesion -->
                           </v-form>
+                          <!-- V-IF para poder recuperar contraeña  -->
                           <div v-if="recuperar">
                             <h3 class="text-center mt-3">Recuperar clave</h3>
                           </div>
+                          
                         </v-card-text>
                         <div class="text-center mt-3">
                           <!-- este boton es el disparador para iniciar sesion  -->
@@ -109,7 +100,6 @@
                           </h5>
                         </v-card-text>
                         <div class="text-center">
-                          <!-- botón toggle para ir a formulario de registro -->
                           <v-btn rounded outlined="" dark @click="step++"
                             >Registrate</v-btn
                           >
@@ -129,7 +119,6 @@
                           </h5>
                         </v-card-text>
                         <div class="text-center">
-                          <!-- boton toggle  -->
                           <v-btn
                             class="mb-2"
                             rounded
@@ -159,11 +148,13 @@
                             </v-btn>
                           </div>
                           <h4 class="text-center mt-4">
-                            Usa tu email para registrarte
+                            Usa tu email para ragistrarte
                           </h4>
                           <!-- INICIO de formulario de registro -->
-                          <v-form refs="form">
-                            <!-- input nombre  -->
+
+                          <!-- input nombre  -->
+
+                          <v-form refs="form" lazy-validation>
                             <v-text-field
                               label="Name"
                               name="Name"
@@ -172,7 +163,6 @@
                               color="teal accent-3"
                               v-model="register.nombre"
                             />
-                            <!-- input apellido  -->
                             <v-text-field
                               label="Apellidos"
                               name="Apellidos"
@@ -184,7 +174,6 @@
                               required
                               v-model="register.apellido"
                             />
-                            <!-- input email  -->
                             <v-text-field
                               label="Email"
                               name="Email"
@@ -195,7 +184,7 @@
                               required
                               v-model="register.email"
                             />
-                            <!-- input password -->
+                            <!-- input password 1 -->
                             <v-text-field
                               label="Password"
                               name="Password"
@@ -213,7 +202,7 @@
                                 passwRules.min,
                               ]"
                             />
-                            <!-- input repeat password -->
+                            <!-- Input repeat password2  -->
                             <v-text-field
                               id="password2"
                               label="Repetir Password"
@@ -246,7 +235,7 @@
                                 alerta Ey {{ error_msg }}
                               </v-alert>
                             </div>
-                           
+
                             <!-- input foto  -->
 
                             <!-- fin de formulario de registro -->
@@ -258,7 +247,6 @@
                             rounded
                             color="teal accent-3 mb-3"
                             dark
-                            
                             type="submit"
                             @click="sendRegister"
                             >Registrar</v-btn
@@ -276,7 +264,6 @@
     </div>
   </v-app>
 </template>
-
 <script>
 import axios from "axios";
 
@@ -286,24 +273,33 @@ export default {
     show1: false,
     show2: false,
     register: {
-      
       email: "",
       password: "",
       repeat_password: "",
       nombre: "",
       apellido: "",
-      telefono: "",
-      foto: "",
+      telefono:"",
+      foto:"",
     },
     form: {
       email: "",
       password: "",
-      
     },
+
+    nameRules: [
+      (v) => !!v || "Nombre es requerido",
+      (v) => v.length <= 15 || "El nombre debe contener al menos 15 carácteres",
+    ],
+    apellidoRules: [
+      (v) => !!v || "Apellido es requerido",
+      (v) =>
+        v.length <= 15 || "El apellido debe contener al menos 20 carácteres",
+    ],
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+/.test(v) || "E-mail debe ser valido",
     ],
+
     passwRules: {
       required: (value) => !!value || "Contraseña requerida",
       min: (v) => v.length >= 6 || "Min 6 caracteres",
@@ -336,34 +332,32 @@ export default {
         )
         .then((resp) => {
           console.log("respuesta de api", resp);
-          if (resp.data == "ok") {
-            console.log(resp, "todo bien");
+          if (resp.statusText == "OK") {
+            
+            console.log("todo bien");
             //poner aqui el redirect
-            setTimeout(() => this.redirect(), 1000);
+            setTimeout(
+              () => this.redirect("Inicio de sesión satisfactorio"),
+              1000
+            );
           } else {
             this.error = true;
             this.error_msg = resp.data.error_msg;
             this.form = "";
-            this.recuperar= true;
+            this.recuperar = true;
           }
         })
         .catch((error) => {
           // handle error
           alert("usuario o contraseña incorrecto");
           console.log("error 1", error);
-          this.recuperar= true;
+          this.recuperar = true;
           this.form = "";
           this.error = true;
           this.error_msg = resp.data.error_msg;
         });
 
-      // axios.post("http://localhost:3000/users/sign_in",data).
-      // then((resp) => {
-      //   console.log(resp)
-      //   const token = resp.token;
-      //   localStorage.setItem("token", token);
-      // });
-      // console.log("formulario inicio de sesion enviado");
+      
     },
     // metodo para enviar el formulario  de registro
     sendRegister(e) {
@@ -379,10 +373,10 @@ export default {
         .post("https://openroadmap-api-staging.herokuapp.com/users", data)
         .then((resp) => {
           console.log(resp);
-          if (resp.data == "ok") {
+          if (resp.statusText == "OK") {
             console.log("registro exitoso");
             //poner aqui el redirect
-            setTimeout(() => this.redirect(), 1000);
+            setTimeout(() => this.redirect("Registro hecho con éxito"), 1000);
           } else {
             this.error2 = true;
             this.error_msg = resp.data.error_msg;
@@ -396,30 +390,54 @@ export default {
           this.error2 = true;
           this.error_msg = resp.data.error_msg;
         });
-
-      // setTimeout(() => this.redirect(), 1000);
-    },
-    redirect() {
-      this.$router.push({ name: "Home" });
     },
     // metodo para iniciar sesion en GitHub
     loginGitHub() {
+      // TODO Revisar no se observa comunicacion con github en ningun momento
       alert("iniciar sesion en github");
-      axios.post("http://localhost:3000/users/auth/github/callback");
+      axios.post(
+        "https://openroadmap-api-staging.herokuapp.com/users/auth/github/callback"
+      );
     },
+
     // metodo para iniciar sesion en Google
     async loginGoggle() {
+      const authCode = await this.$gAuth.getAuthCode();
       axios
-        .get("http://localhost:3000/users/auth/google_oauth2/")
+        .post(
+          "https://openroadmap-api-staging.herokuapp.com/users/auth/google_oauth2/callback",
+          {
+            code: authCode,
+            redirect_uri: "postmessage",
+          }
+        )
         .then((res) => {
           console.log(res);
+          if (resp.data == "ok") {
+            console.log("registro exitoso");
+            //poner aqui el redirect
+            setTimeout(() => this.redirect("Registro hecho con éxito"), 1000);
+          } else {
+            this.error = true;
+            this.error_msg = resp.data.error_msg;
+          }
         })
         .catch((error) => {
           // handle error
-          console.log("hay error", error);
+          alert("registro invalido");
+          console.log("error 1", error);
+          this.error2 = true;
+          this.register = "";
+          this.error_msg = resp.data.error_msg;
         });
 
-      this.$router.push({ name: "Home" });
+      setTimeout(() => this.redirect(), 1000);
+    },
+    redirect(msg) {
+      // this.$router.push({ name: "Redireccionamiento" });
+      this.$router.push("/");
+      alert(msg);
+
     },
   },
 };

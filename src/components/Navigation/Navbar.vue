@@ -1,20 +1,16 @@
 <template>
   <v-toolbar flat>
-
-     <img class=" logo" :src="require('@/assets/logoo.png') " />
-    <v-toolbar-title >
-
-    </v-toolbar-title>
-
+    <img class="logo" :src="require('/src/assets/logo1.png')" />
+    <v-toolbar-title> </v-toolbar-title>
 
     <v-spacer></v-spacer>
     <v-toolbar-items flat>
       <v-btn text>
-        <router-link to="/">Iniciar</router-link>
+        <router-link to="/">Inicio</router-link>
       </v-btn>
 
       <v-btn text>
-        <router-link to="/home">RoadMap</router-link>
+        <router-link to="/login">Login</router-link>
       </v-btn>
 
       <v-btn text>
@@ -34,6 +30,4 @@ export default {
 .logo {
   height: 16rem;
 }
-
-
 </style>

@@ -1,7 +1,7 @@
 <template>
   <v-toolbar flat>
 
-     <img class=" logo" :src="require('../../assets/logoo.png') " />
+     <img class=" logo" :src="require('@/assets/logoo.png') " />
     <v-toolbar-title >
 
     </v-toolbar-title>
